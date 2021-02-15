@@ -153,7 +153,7 @@ class PPR(base,regression,trans,classf,multi):
 			diff = R_j - np.outer(self._f[j](p_j), self._beta[:, j].T)
 			# square the difference, multiply rows by example weights, multiply
 			# columns by their weights, and sum to get the final loss
-			loss = np.dot(numpy.dot(self._example_weights, diff**2),
+			loss = np.dot(np.dot(self._example_weights, diff**2),
 				self._out_dim_weights)
 			itr += 1
 
@@ -177,14 +177,14 @@ class PPR(base,regression,trans,classf,multi):
 		deriv = fit.derivative(1)
 
 		if self.show_plots and (itr % self.plot_epoch == 0):
-			pyplot.scatter(x, y)
-			pyplot.title('stage ' + str(j) + ' iteration ' + str(itr))
-			pyplot.xlabel('projections')
-			pyplot.ylabel('residuals')
+			plt.scatter(x, y)
+			plt.title('stage ' + str(j) + ' iteration ' + str(itr))
+			plt.xlabel('projections')
+			plt.ylabel('residuals')
 			xx = np.linspace(min(x), max(x), 100)
 			yy = fit(xx)
-			pyplot.plot(xx, yy, 'g', linewidth=1)
-			pyplot.show()
+			plt.plot(xx, yy, 'g', linewidth=1)
+			plt.show()
 
 		return fit, deriv
 
